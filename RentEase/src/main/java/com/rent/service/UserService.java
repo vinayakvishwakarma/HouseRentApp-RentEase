@@ -14,4 +14,9 @@ public interface UserService {
 	UserResponseDTO signIn(AuthDTO dto);
 	
 	List<UserResponseDTO> getAllUsers();
+	
+	ApiResponse updateUserDetails(RegDTO dto);
+	
+	UserResponseDTO getUser(Long id);
+	
 }
