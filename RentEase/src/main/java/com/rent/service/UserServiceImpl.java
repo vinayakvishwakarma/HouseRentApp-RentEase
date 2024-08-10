@@ -58,9 +58,23 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public ApiResponse updateUserDetails(RegDTO dto) {
-		UserEntity user=modelMapper.map(dto, UserEntity.class);
+	public ApiResponse updateUserDetails(Long id,RegDTO dto) {
+		/*
+		 * UserEntity user=modelMapper.map(dto, UserEntity.class);
+		 * userRepository.save(user);
+		 */
+		UserEntity user=userRepository.findById(id)
+				.orElseThrow(()->new InvalidCredentialsException("invalid id!"));
+		user.setFirstName(dto.getFirstName());
+		user.setLastName(dto.getLastName());
+		user.setGender(dto.getGender());
+		user.setEmail(dto.getEmail());
+		user.setPassword(dto.getPassword());
+		user.setPhone(dto.getPhone());
+		user.setRole(dto.getRole());
+		
 		userRepository.save(user);
+		
 		return new ApiResponse("User Updated Successfully!");
 	}
 

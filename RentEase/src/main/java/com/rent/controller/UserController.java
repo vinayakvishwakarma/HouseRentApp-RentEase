@@ -59,10 +59,10 @@ public class UserController {
 		}
 	}
 	
-	@PutMapping
-	public ResponseEntity<?> updateUser(@RequestBody RegDTO dto){
+	@PutMapping("/{id}")
+	public ResponseEntity<?> updateUser(@PathVariable Long id,@RequestBody RegDTO dto){
 		try {
-			return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserDetails(dto));
+			return ResponseEntity.status(HttpStatus.OK).body(userService.updateUserDetails(id,dto));
 		}
 		catch(RuntimeException e){
 			System.out.println(e);

@@ -3,7 +3,9 @@ package com.rent.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
-public class UserResponseDTO {
+public class UserResponseDTO extends BaseDTO {
+	
+	
 	@JsonProperty(access = Access.READ_ONLY)
 	private String firstName;
 

@@ -15,32 +15,42 @@ import javax.persistence.Table;
 @Table(name="properties")
 public class PropertyEntity extends BaseEntity {
 
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="landlord_id", nullable = false)
 	private UserEntity landlord;
+	
 	@Column(length=200,name="address",nullable = false)
 	private String address;
+	
 	@Column(name="area", nullable = false)
 	private String area;
+	
 	@Column(name="city",nullable = false)
 	private String city;
+	
 	@Column(name="state",nullable = false)
 	private String state;
+	
 	@Column(name="description")
 	private String description;
+	
 	@Column(name="amenities",nullable = false)
 	private String amenities;
+	
 	@Column(name="rent",nullable = false)
 	private double rent;
-	@Lob
-	@Column(name="image")
-	private byte[] image;
+
+	/*
+	 * @Lob
+	 * 
+	 * @Column(name="image") private byte[] image;
+	 */
 	public PropertyEntity() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public PropertyEntity(UserEntity landlord, String address, String area, String city, String state,
-			String description, String amenities, double rent, byte[] image) {
+			String description, String amenities, double rent /*byte[] image*/) {
 		super();
 		this.landlord = landlord;
 		this.address = address;
@@ -50,7 +60,7 @@ public class PropertyEntity extends BaseEntity {
 		this.description = description;
 		this.amenities = amenities;
 		this.rent = rent;
-		this.image = image;
+		//this.image = image;
 	}
 	public UserEntity getLandlord() {
 		return landlord;
@@ -100,18 +110,18 @@ public class PropertyEntity extends BaseEntity {
 	public void setRent(double rent) {
 		this.rent = rent;
 	}
-	public byte[] getImage() {
-		return image;
-	}
-	public void setImage(byte[] image) {
-		this.image = image;
-	}
 	@Override
 	public String toString() {
 		return "PropertyEntity [landlord=" + landlord + ", address=" + address + ", area=" + area + ", city=" + city
 				+ ", state=" + state + ", description=" + description + ", amenities=" + amenities + ", rent=" + rent
-				+ ", image=" + Arrays.toString(image) + "]";
+				+ "]";
 	}
+
+	/*
+	 * public byte[] getImage() { return image; } public void setImage(byte[] image)
+	 * { this.image = image; }
+	 */
+	
 	
 	
 	
