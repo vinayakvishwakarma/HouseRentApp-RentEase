@@ -81,6 +81,29 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/property")
+	public ResponseEntity<?> getAllProperty(){
+		
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(userService.getAllProperty());
+		}
+		catch(RuntimeException e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
+		}
+	}
+	
+	@GetMapping("/property/{propertyId}")
+	ResponseEntity<?> getPropertyById(Long propertyId){
+		
+		try {
+			return ResponseEntity.status(HttpStatus.OK).body(userService.getPropertyById(propertyId));
+		}
+		catch(RuntimeException e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
+		}
+	}
 	
 	
 }

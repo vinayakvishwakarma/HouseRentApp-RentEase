@@ -4,6 +4,8 @@ import com.rent.dto.ApiResponse;
 import com.rent.dto.AuthDTO;
 import com.rent.dto.RegDTO;
 import com.rent.dto.UserResponseDTO;
+import com.rent.entities.PropertyEntity;
+
 import java.util.List;
 
 
@@ -19,4 +21,7 @@ public interface UserService {
 	
 	UserResponseDTO getUser(Long id);
 	
+	List<PropertyEntity> getAllProperty();
+	
+	PropertyEntity getPropertyById(Long propertyId);
 }

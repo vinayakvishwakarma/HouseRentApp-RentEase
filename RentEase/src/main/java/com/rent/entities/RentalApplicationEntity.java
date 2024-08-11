@@ -13,11 +13,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name="rental_app")
 public class RentalApplicationEntity extends BaseEntity {
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="property_id",nullable = false)
 	private PropertyEntity property;
 	
-	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id",nullable = false)
 	private UserEntity tenant;
 	
