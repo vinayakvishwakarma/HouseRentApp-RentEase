@@ -15,7 +15,7 @@ import javax.persistence.UniqueConstraint;
 uniqueConstraints = 
 @UniqueConstraint(columnNames = {"rentalApp_id","payment_month"}))
 public class PaymentEntity extends BaseEntity{
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="rentalApp_id",nullable = false)
 	private RentalApplicationEntity rentalApplication;
 	

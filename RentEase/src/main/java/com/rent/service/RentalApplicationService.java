@@ -14,4 +14,6 @@ public interface RentalApplicationService {
 	//List<RentalApplicationResponseDTO> getAllRentalApplicationByPropertyId(Long propertyId);
 	
 	List<RentalApplicationEntity> getAllRentalApplicationByPropertyId(Long propertyId);
+	
+	ApiResponse approveRentalApplication(Long landlordId,Long rentalId,String status);
 }

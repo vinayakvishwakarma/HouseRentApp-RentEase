@@ -12,49 +12,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rent.dto.ApiResponse;
-import com.rent.dto.RentalApplicationDTO;
-import com.rent.entities.RentalApplicationEntity;
-import com.rent.service.RentalApplicationService;
+import com.rent.entities.PaymentEntity;
+import com.rent.service.PaymentService;
 
 @RestController
-@RequestMapping("/rentalApplication")
-public class RentalApplicationController {
-
+@RequestMapping("/payments")
+public class PaymentController {
+	
 	@Autowired
-	private RentalApplicationService rentalApplicationService;
+	private PaymentService paymentService;
 	
-	@PostMapping
-	ResponseEntity<?> createRentalApplication(@RequestBody RentalApplicationDTO dto){
+	@PostMapping("/{rentalAppId}")
+	public ResponseEntity<?>  makePayment(@PathVariable Long rentalAppId, @RequestBody PaymentEntity payment){
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.createRentalApplication( dto));
+			return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.makePayment(rentalAppId, payment));
 		}
 		catch(RuntimeException e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
+			
 		}
+		
 	}
-	
-	@GetMapping("/{propertyId}")
-	public ResponseEntity<?> getAllRentalApplicationByPropertyId(@PathVariable Long propertyId){
+	@GetMapping("/{landlordId}")
+	public ResponseEntity<?> findPaymentByLandlordId(@PathVariable Long landlordId){
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.getAllRentalApplicationByPropertyId(propertyId));
+			return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.findPaymentByLandlordId(landlordId));
 		}
 		catch(RuntimeException e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
+			
 		}
 	}
 	
-	@PutMapping("/{rentalId}")
-	public ResponseEntity<?> approveRentalApplication(Long landlordId, Long rentalId, String status){
+	@PutMapping("/{paymentId}")
+	public ResponseEntity<?> approvePayment(  Long landlordId, Long paymentId, String status){
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.approveRentalApplication(landlordId, rentalId, status));
+			return ResponseEntity.status(HttpStatus.CREATED).body(paymentService.approvePayment(landlordId, paymentId, status));
 		}
 		catch(RuntimeException e) {
 			System.out.println(e);
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
+			
 		}
 	}
-	
-	
+
 }

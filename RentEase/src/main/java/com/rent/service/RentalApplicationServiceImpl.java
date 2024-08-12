@@ -14,6 +14,7 @@ import com.rent.dto.RentalApplicationDTO;
 import com.rent.dto.RentalApplicationResponseDTO;
 import com.rent.entities.PropertyEntity;
 import com.rent.entities.RentalApplicationEntity;
+import com.rent.entities.RentalStatus;
 import com.rent.entities.Role;
 import com.rent.entities.UserEntity;
 import com.rent.exception.InvalidCredentialsException;
@@ -69,6 +70,22 @@ public class RentalApplicationServiceImpl implements RentalApplicationService {
 	public List<RentalApplicationEntity> getAllRentalApplicationByPropertyId(Long propertyId) {
 		
 		return rentalApplicationRepository.findByPropertyId(propertyId);
+	}
+
+	@Override
+	public ApiResponse approveRentalApplication(Long landlordId, Long rentalId, String status) {
+		RentalApplicationEntity rentalApp=rentalApplicationRepository.findById(rentalId)
+				.orElseThrow(()->new InvalidCredentialsException("invalid rentalApp id!"));
+		PropertyEntity property=rentalApp.getProperty();
+		if(property.getLandlord().getId().equals(landlordId) && property.getLandlord().getRole().equals(Role.LANDLORD) ) {
+			RentalStatus st=RentalStatus.valueOf(status.toUpperCase());
+			rentalApp.setStatus(st);
+			rentalApplicationRepository.save(rentalApp);
+		}
+		else {
+			throw new InvalidCredentialsException("invalid landlord id !");
+		}
+		return new ApiResponse("updated Rental Application!!");
 	}
 
 //	@Override
