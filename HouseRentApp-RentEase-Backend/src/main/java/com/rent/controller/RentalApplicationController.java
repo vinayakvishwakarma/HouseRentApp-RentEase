@@ -58,5 +58,16 @@ public class RentalApplicationController {
 		}
 	}
 	
+	@GetMapping("/tenantId")
+	public ResponseEntity<?> getAllRentalApplicationByTenantId(@PathVariable Long tenantId){
+		try {
+			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.getAllRentalApplicationByTenantId(tenantId));
+		}
+		catch(RuntimeException e) {
+			System.out.println(e);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiResponse(e.getMessage()));
+		}
+	}
+	
 	
 }

@@ -13,4 +13,7 @@ public interface RentalApplicationRepository extends JpaRepository<RentalApplica
 
 	@Query("select m from RentalApplicationEntity m where m.property.id=:propertyId")
 	List<RentalApplicationEntity> findByPropertyId( Long propertyId);
+	
+	@Query("select m from RentalApplicationEntity m where m.tenant.id=:tenantId")
+	List<RentalApplicationEntity> findByTenantId(@Param("tenantId") Long tenantId);
 }

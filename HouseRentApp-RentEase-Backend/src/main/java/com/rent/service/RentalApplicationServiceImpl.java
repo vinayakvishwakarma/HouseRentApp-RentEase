@@ -88,6 +88,12 @@ public class RentalApplicationServiceImpl implements RentalApplicationService {
 		return new ApiResponse("updated Rental Application!!");
 	}
 
+	@Override
+	public List<RentalApplicationEntity> getAllRentalApplicationByTenantId(Long tenantId) {
+		return rentalApplicationRepository.findByTenantId(tenantId);
+		
+	}
+
 //	@Override
 //	public List<RentalApplicationResponseDTO> getAllRentalApplicationByPropertyId(Long propertyId) {
 //		PropertyEntity property=propertyRepository.findById(propertyId)
