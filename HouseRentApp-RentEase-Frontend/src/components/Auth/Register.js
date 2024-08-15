@@ -1,45 +1,34 @@
-// src/components/Signup.js
+// src/components/Auth/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Signup = () => {
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phone: '',
-    gender: '',
-    role: ''
-  });
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
+function Register() {
+    const [formData, setFormData] = useState({
+        username: '',
+        password: '',
+        email: '',
+        role: ''  // tenant, landlord, admin
     });
-  };
+    const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post('http://localhost:8080/users/register', formData);
-      alert('Registration successful');
-      navigate('/login');
-    } catch (error) {
-      console.error('Error during registration:', error);
-      alert('Registration failed');
-    }
-  };
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
 
-  return (
-    <div className="signup-container">
-      <h2>Signup</h2>
-      <form onSubmit={handleSubmit}>
-        <input
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8080/users/register', formData)
+            .then(res => {
+                console.log(res.data);
+                navigate('/login'); // Redirect to login after registration
+            })
+            .catch(err => console.error(err));
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <input
           type="text"
           name="firstName"
           placeholder="First Name"
@@ -96,14 +85,12 @@ const Signup = () => {
           required
         >
           <option value="">Select Role</option>
-          <option value="ADMIN">Admin</option>
-          <option value="TENANT">Tenant</option>
-          <option value="LANDLORD">Landlord</option>
+          <option value="TENANT">TENANT</option>
+          <option value="LANDLORD">LANDLORD</option>
         </select>
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  );
-};
+            <button type="submit">Register</button>
+        </form>
+    );
+}
 
-export default Signup;
+export default Register;
