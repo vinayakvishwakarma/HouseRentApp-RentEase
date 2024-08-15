@@ -1,0 +1,91 @@
+.tenant-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.dropdown {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 200px;
+    background-color: #fff;
+}
+
+.dropdown:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+}
+
+.property-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.property-table th,
+.property-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.property-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.property-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.property-table tr:hover {
+    background-color: #ddd;
+}
+
+.property-table td {
+    color: #555;
+}
+
+.property-table tr td:first-child {
+    text-align: left;
+}
+.btn-logout {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+    background-color: #e60000;
+}
+.btn-login {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+}
