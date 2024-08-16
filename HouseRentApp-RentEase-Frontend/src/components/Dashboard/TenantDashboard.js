@@ -1,5 +1,7 @@
+// src/components/Dashbord/Tenentdashboard.js
 import React, { useState, useEffect } from 'react';
 import { getAllProperties } from '../../services/propertyService';
+import { createApplication } from '../../services/applicationService';
 import { useNavigate } from 'react-router-dom';
 import './TenantDashboard.css';
 
@@ -26,7 +28,6 @@ const TenantDashboard = () => {
 
             const uniqueStates = [...new Set(response.data.map(property => property.state))];
             setStates(uniqueStates);
-
         } catch (error) {
             console.error('Error fetching properties:', error);
             alert('Failed to retrieve properties.');
@@ -66,12 +67,44 @@ const TenantDashboard = () => {
         setSelectedArea(area);
 
         const filteredByArea = properties.filter(
-            property => 
+            property =>
                 property.state === selectedState &&
                 property.city === selectedCity &&
                 property.area === area
         );
         setFilteredProperties(filteredByArea);
+    };
+
+    const handleBookProperty = async (propertyId) => {
+        const data = sessionStorage.getItem('user');
+        if (!data) {
+            console.error('No tenant ID found in session storage!');
+            alert('Please log in to continue.');
+            return;
+        }
+        const user = JSON.parse(data);
+        const tenantId = user?.data?.id;
+        
+
+        // Define the rentalApplication object with necessary fields
+        const rentalApplication = {
+            // Add any necessary fields for your rental application
+            // For example:
+            propertyId: propertyId,
+            tenantId: tenantId,
+            status: 'PENDING' // Or whatever default status you need
+            // Add other fields if required
+        };
+
+        
+
+        try {
+            await createApplication({ tenantId, propertyId, rentalApplication });
+            alert('Rental application created successfully.');
+        } catch (error) {
+            console.error('Error creating rental application:', error);
+            alert('Failed to create rental application.');
+        }
     };
 
     const handleLogout = () => {
@@ -118,8 +151,8 @@ const TenantDashboard = () => {
                 </select>
             </div>
 
-            {filteredProperties.length > 0 ? (
-                <table className="property-table">
+            {filteredProperties.length > 0 && (
+                <table className="property-table" border={2}>
                     <thead>
                         <tr>
                             <th>Address</th>
@@ -129,6 +162,7 @@ const TenantDashboard = () => {
                             <th>Description</th>
                             <th>Amenities</th>
                             <th>Rent</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,12 +175,17 @@ const TenantDashboard = () => {
                                 <td>{property.description}</td>
                                 <td>{property.amenities}</td>
                                 <td>{property.rent}</td>
+                                <td>
+                                    <button 
+                                        onClick={() => handleBookProperty(property.id)} 
+                                        className="btn btn-primary">
+                                        Book Property
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            ) : (
-                <p>No properties found.</p>
             )}
         </div>
     );

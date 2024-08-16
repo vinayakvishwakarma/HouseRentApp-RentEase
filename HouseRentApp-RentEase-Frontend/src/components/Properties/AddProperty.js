@@ -31,7 +31,6 @@ const AddProperty = () => {
       alert('Please log in to continue.');
       return;
     }
-
     let user;
     try {
       user = JSON.parse(data);
