@@ -39,21 +39,15 @@ public class RentalApplicationServiceImpl implements RentalApplicationService {
 	private ModelMapper modelMapper;
 
 	@Override
-	public ApiResponse createRentalApplication( RentalApplicationDTO dto) {
+	public ApiResponse createRentalApplication(Long tenantId,Long propertyId, RentalApplicationDTO dto) {
 		
-		PropertyEntity property=propertyRepository.findById(dto.getPropertyId())
+		PropertyEntity property=propertyRepository.findById(propertyId)
 				.orElseThrow(()->new InvalidCredentialsException("Invalid property!"));
 		
-		UserEntity user=userRepository.findById(dto.getTenantId())
+		UserEntity user=userRepository.findById(tenantId)
 				.orElseThrow(()->new InvalidCredentialsException("invalid id!"));
 		if(user.getRole().equals(Role.TENANT)) {
-			/*
-			 * PropertyEntity property=propertyRepository.findById(propertyId)
-			 * .orElseThrow(()->new InvalidCredentialsException("Invalid property!"));
-			 */
-//			rentalApp.setTenant(user);
-//			rentalApp.setProperty(property);
-//			rentalApplicationRepository.save(rentalApp);
+			
 			RentalApplicationEntity rentalApp=modelMapper.map(dto, RentalApplicationEntity.class);
 			rentalApp.setTenant(user);
 			rentalApp.setProperty(property);
@@ -94,26 +88,7 @@ public class RentalApplicationServiceImpl implements RentalApplicationService {
 		
 	}
 
-//	@Override
-//	public List<RentalApplicationResponseDTO> getAllRentalApplicationByPropertyId(Long propertyId) {
-//		PropertyEntity property=propertyRepository.findById(propertyId)
-//				.orElseThrow(()->new InvalidCredentialsException("invalid property id!"));
-//		List<RentalApplicationResponseDTO> dto=rentalApplicationRepository.findByPropertyId(propertyId)
-//				.stream()
-//				.map(rental->modelMapper.map(rental, RentalApplicationResponseDTO.class))
-//				.collect(Collectors.toList());
-////		for (RentalApplicationResponseDTO d : dto) {
-////			d.setPropertyId(rentalApplicationRepository.findById(d.getId())
-////					.orElseThrow(()->new InvalidCredentialsException("invalid property id!"))
-////					.getProperty().getId());
-////			d.setTenantId(rentalApplicationRepository.findById(d.getId())
-////					.orElseThrow(()->new InvalidCredentialsException("invalid property id!"))
-////					.getTenant().getId());
-////			dto.add(d);
-////		}
-//		
-//		return dto;
-//	}
+
 	
 	
 	

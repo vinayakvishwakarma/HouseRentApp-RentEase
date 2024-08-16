@@ -9,7 +9,7 @@ import com.rent.entities.RentalApplicationEntity;
 
 public interface RentalApplicationService {
 
-	ApiResponse createRentalApplication(RentalApplicationDTO dto);
+	ApiResponse createRentalApplication(Long tenantId,Long propertyId, RentalApplicationDTO dto);
 	
 	//List<RentalApplicationResponseDTO> getAllRentalApplicationByPropertyId(Long propertyId);
 	

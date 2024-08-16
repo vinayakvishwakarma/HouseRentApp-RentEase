@@ -25,10 +25,10 @@ public class RentalApplicationController {
 	@Autowired
 	private RentalApplicationService rentalApplicationService;
 	
-	@PostMapping
-	ResponseEntity<?> createRentalApplication(@RequestBody RentalApplicationDTO dto){
+	@PostMapping("/{tenantId}/{propertyId}")
+	ResponseEntity<?> createRentalApplication(@PathVariable Long tenantId,@PathVariable Long propertyId, @RequestBody RentalApplicationDTO dto){
 		try {
-			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.createRentalApplication( dto));
+			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.createRentalApplication(tenantId, propertyId, dto));
 		}
 		catch(RuntimeException e) {
 			System.out.println(e);
@@ -47,8 +47,8 @@ public class RentalApplicationController {
 		}
 	}
 	
-	@PutMapping("/{rentalId}")
-	public ResponseEntity<?> approveRentalApplication(Long landlordId, Long rentalId, String status){
+	@PutMapping("/{landlordId}/{rentalId}/{status}")
+	public ResponseEntity<?> approveRentalApplication(@PathVariable Long landlordId,@PathVariable Long rentalId,@PathVariable String status){
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.approveRentalApplication(landlordId, rentalId, status));
 		}
@@ -58,7 +58,7 @@ public class RentalApplicationController {
 		}
 	}
 	
-	@GetMapping("/tenantId")
+	@GetMapping("/prop/{tenantId}")
 	public ResponseEntity<?> getAllRentalApplicationByTenantId(@PathVariable Long tenantId){
 		try {
 			return ResponseEntity.status(HttpStatus.CREATED).body(rentalApplicationService.getAllRentalApplicationByTenantId(tenantId));

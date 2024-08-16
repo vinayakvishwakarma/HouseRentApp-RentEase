@@ -13,11 +13,11 @@ public class RentalApplicationDTO  {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public RentalApplicationDTO(Long propertyId, Long tenantId, RentalStatus status) {
+	public RentalApplicationDTO(Long propertyId, Long tenantId) {
 		super();
 		this.propertyId = propertyId;
 		this.tenantId = tenantId;
-		this.status = status;
+		this.status = RentalStatus.PENDING;
 	}
 	public Long getPropertyId() {
 		return propertyId;
