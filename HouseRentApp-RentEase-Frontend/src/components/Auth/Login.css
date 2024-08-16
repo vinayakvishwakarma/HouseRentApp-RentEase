@@ -6,7 +6,7 @@
   align-items:center;
     width : 420px;
     background: transparent;
-    border: 5px solid rgb(255, 255, 255,.3);
+    border: 5px solid rgba(109, 107, 107, 0.3);
     color: #ffffff;
     backdrop-filter: blur(120px);
     border-radius: 15px;

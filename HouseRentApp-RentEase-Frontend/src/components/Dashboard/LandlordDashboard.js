@@ -116,6 +116,7 @@ const LandlordDashboard = () => {
     };
 
     return (
+        
         <div className="landlord-container">
             <div className="logout-container">
                 <button onClick={handleLogout} className="btn btn-logout">

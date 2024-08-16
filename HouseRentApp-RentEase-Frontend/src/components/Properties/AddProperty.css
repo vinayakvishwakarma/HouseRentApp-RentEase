@@ -1,0 +1,77 @@
+/* src/components/Properties/AddProperty.css */
+
+.container {
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(30px);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    margin: 0 auto; /* Center align the container */
+}
+
+.container h2 {
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.container .form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Space between the items */
+    margin-bottom: 20px;
+}
+
+.container .form-group .form-item {
+    flex: 1;
+    min-width: calc(50% - 15px); /* Two items side by side with gap adjustment */
+}
+
+.container .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.container .form-group input,
+.container .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.container .form-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.container .form-group input[type="number"]::-webkit-inner-spin-button,
+.container .form-group input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.container button {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 700;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.container button:hover {
+    background-color: #f0f0f0;
+}
